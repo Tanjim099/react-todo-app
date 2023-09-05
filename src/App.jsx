@@ -1,14 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useReducer, useState } from 'react'
 import './App.css'
+import AddTodo from './components/AddTodo/AddTodo'
+import TodoList from './components/TodoList/TodoList'
+
+import TodoContext from './context/TodoContext'
+import TodoReducer from './reducers/TodoReducer'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [todos, dispatch] = useReducer(TodoReducer, [])
 
   return (
     <>
-      Hello</>
+      <TodoContext.Provider value={{ todos, dispatch }}>
+        <AddTodo />
+        <TodoList />
+      </TodoContext.Provider>
+    </>
   )
 }
 
